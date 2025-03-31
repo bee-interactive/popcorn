@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.0",
         "livewire/flux-pro": "^2.1",
+        "pinkary-project/type-guard": "^0.1.0",
         "saloonphp/laravel-plugin": "^3.5",
         "saloonphp/saloon": "^3.11",
         "spatie/laravel-permission": "^6.15",

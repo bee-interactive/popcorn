@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
 use App\Livewire\List\ListIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -22,6 +23,10 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/the-movie-database-token', Tmdb::class)->name('settings.tmdb');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+});
+
+Route::prefix('/@{username}')->group(function () {
+    Route::get('/', UserController::class)->name('profile.show');
 });
 
 require __DIR__.'/auth.php';
