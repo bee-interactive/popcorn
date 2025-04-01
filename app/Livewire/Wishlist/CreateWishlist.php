@@ -5,9 +5,9 @@ namespace App\Livewire\Wishlist;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 
-class CreateWishlist extends Component
+class CreateWishlist extends ModalComponent
 {
     public $name;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\List;
+namespace App\Livewire\Wishlist;
 
 use App\Models\Wishlist;
 use Livewire\Component;

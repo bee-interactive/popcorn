@@ -21,15 +21,7 @@
                         <livewire:wishlist.user-wishlists />
                     </div>
 
-                    <flux:modal.trigger class="cursor-pointer" name="create-wishlist">
-                        <div class="text-sm mt-4 pl-3">
-                            <div class="cursor-pointer flex justify-between w-full">
-                                <span class="underline bg-zinc-100 dark:bg-zinc-800 rounded pr-2 py-1 pl-1 underline-offset-4 flex space-x-1">
-                                    <flux:icon.plus variant="mini" /> <span>{{ __('add list') }}</span>
-                                </span>
-                            </div>
-                        </div>
-                    </flux:modal.trigger>
+                    <flux:button onclick="Livewire.dispatch('openModal', { component: 'wishlist.create-wishlist' })" class="cursor-pointer" icon="plus" size="sm" variant="ghost">{{ __('add list') }}</flux:button>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -86,7 +78,6 @@
             </flux:dropdown>
         </flux:sidebar>
 
-        <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
@@ -152,6 +143,6 @@
 
         @livewire('wire-elements-modal')
 
-        <flux:toast position="top right" />
+        <flux:toast position="bottom right" />
     </body>
 </html>

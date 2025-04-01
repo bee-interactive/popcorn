@@ -5,7 +5,7 @@
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <header class="w-full lg:max-w-4xl sm:max-w-[435px] flex justify-between text-sm mb-6 not-has-[nav]:hidden">
-            <span class="mr-5 flex items-center space-x-2">
+            <span class="flex items-center space-x-2">
                 <x-app-logo />
             </span>
 
@@ -40,8 +40,9 @@
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <main class="flex sm:max-w-[435px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
                 <div class="text-[13px] leading-[20px] flex-1 p-6 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <h1 class="mb-1 font-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">Popcorn is a small service that let's you save movies and tv shows to watch later. <br>We suggest starting with the following.</p>
+                    <h1 class="mb-1 font-medium text-xl">{{ __('Let’s get started') }}</h1>
+                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">{!! __('Popcorn is a small service that let’s you save movies and tv shows to watch later.') !!}</p>
+                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">{!! __('We suggest starting with the following:') !!}</p>
                     <ul class="flex flex-col mb-4 lg:mb-6">
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
                             <span class="relative py-1 bg-white dark:bg-[#161615]">
@@ -50,9 +51,9 @@
                                 </span>
                             </span>
                             <span>
-                                Create a new
-                                <a href="{{ route('register') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
-                                    <span>account</span>
+                                {{ __('Create a new') }}
+                                <a href="{{ route('register') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#3f99c6] dark:text-[#FF4433] ml-1">
+                                    <span>{{ __('account') }}</span>
                                     <svg
                                         width="10"
                                         height="11"
@@ -77,9 +78,9 @@
                                 </span>
                             </span>
                             <span>
-                                Log in and start
-                                <a href="{{ route('login') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433] ml-1">
-                                    <span>collecting films and tv shows</span>
+                                {{ __('Log in and start') }}
+                                <a href="{{ route('login') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#3f99c6] dark:text-[#FF4433] ml-1">
+                                    <span>{{ __('collecting films and tv shows') }}</span>
                                     <svg
                                         width="10"
                                         height="11"
@@ -101,13 +102,13 @@
                     <ul class="flex gap-3 text-sm leading-normal">
                         <li>
                             <a href="{{ route('register') }}" class="inline-block dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal">
-                                Create a free account now
+                                {{ __('Create a free account now') }}
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[16/9] w-full lg:w-[438px] shrink-0 overflow-hidden">
-                    <img src="https://plus.unsplash.com/premium_photo-1677651866184-9845765dfd37?q=80&w=500&h=600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full text-[#F53003] dark:text-[#F61500] opacity-100 max-w-none" alt="">
+                    <img src="{{ asset('img/popcorn-banner.jpg') }}" class="w-full text-[#3f99c6] dark:text-[#F61500] opacity-100 max-w-none" alt="Picture by Doha Khattab @unsplash">
                     <div class="absolute inset-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]"></div>
                 </div>
             </main>

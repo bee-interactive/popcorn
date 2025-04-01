@@ -24,12 +24,12 @@
 
                     @if(!$item->watched)
                         <div class="flex justify-center">
-                            <flux:button tooltip="{{ __('Mark as viewed') }}" onclick="Livewire.dispatch('openModal', { component: 'list.mark-item-as-viewed', arguments: { item: {{ json_encode($item) }} }})" size="sm" icon="check-circle"></flux:button>
+                            <flux:button tooltip="{{ __('Mark as viewed') }}" onclick="Livewire.dispatch('openModal', { component: 'item.mark-item-as-viewed', arguments: { item: {{ json_encode($item) }} }})" size="sm" icon="check-circle"></flux:button>
                         </div>
                     @endif
 
                     <div class="flex justify-end">
-                        <flux:button tooltip="{{ __('Remove this item') }}" variant="danger" onclick="Livewire.dispatch('openModal', { component: 'list.delete-item', arguments: { model: 'App\\\Models\\\Item', model_id: {{ $item->id }} }})" size="sm" icon="trash"></flux:button>
+                        <flux:button tooltip="{{ __('Remove this item') }}" variant="danger" onclick="Livewire.dispatch('openModal', { component: 'item.delete-item', arguments: { model: 'App\\\Models\\\Item', model_id: {{ $item->id }} }})" size="sm" icon="trash"></flux:button>
                     </div>
                 </div>
             </div>

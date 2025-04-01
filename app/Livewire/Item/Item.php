@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\List;
+namespace App\Livewire\Item;
 
 use App\Models\Item as ItemModel;
 use Livewire\Attributes\On;
@@ -15,9 +15,9 @@ class Item extends Component
         $this->item = $item;
     }
 
-    #[On('data-updated')]
+    #[On('mark-as-viewed')]
     public function render()
     {
-        return view('livewire.list.item');
+        return view('livewire.item.item');
     }
 }

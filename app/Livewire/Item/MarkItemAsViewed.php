@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Livewire\List;
+namespace App\Livewire\Item;
 
+use App\Livewire\Item\Item as ItemComponent;
 use App\Models\Item;
 use Flux\Flux;
 use LivewireUI\Modal\ModalComponent;
@@ -26,7 +27,7 @@ class MarkItemAsViewed extends ModalComponent
             'watched' => true,
         ]);
 
-        $this->dispatch('data-updated');
+        $this->dispatch('mark-as-viewed')->to(ItemComponent::class);
 
         Flux::toast(
             text: __('The element has been marked as viewed successfully'),

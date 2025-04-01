@@ -6,6 +6,8 @@ use Livewire\Livewire;
 
 uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
+pest()->group('profile');
+
 test('profile page is displayed', function (): void {
     $this->actingAs($user = User::factory()->create());
 
@@ -19,6 +21,7 @@ test('profile information can be updated', function (): void {
 
     $response = Livewire::test(Profile::class)
         ->set('name', 'Test User')
+        ->set('username', 'username')
         ->set('email', 'test@example.com')
         ->call('updateProfileInformation');
 
@@ -27,8 +30,50 @@ test('profile information can be updated', function (): void {
     $user->refresh();
 
     expect($user->name)->toEqual('Test User');
+    expect($user->username)->toEqual('username');
     expect($user->email)->toEqual('test@example.com');
     expect($user->email_verified_at)->toBeNull();
+});
+
+test('a username is constrained to be unique', function (): void {
+    $jane = User::factory()->create([
+        'username' => 'jane',
+    ]);
+    $john = User::factory()->create([
+        'username' => 'john',
+    ]);
+
+    $this->actingAs($john);
+
+    $response = Livewire::test(Profile::class)
+        ->set('name', 'Test User')
+        ->set('username', 'jane')
+        ->set('email', 'test@example.com')
+        ->call('updateProfileInformation');
+
+    $response->assertHasErrors();
+
+    $john->refresh();
+
+    expect($john->username)->toEqual('john');
+});
+
+test('a username is constrained to not be in the reserved list', function (): void {
+    $john = User::factory()->create([
+        'username' => 'john',
+    ]);
+
+    $this->actingAs($john);
+
+    $response = Livewire::test(Profile::class)
+        ->set('name', 'Test User')
+        ->set('username', 'anonymous')
+        ->set('email', 'test@example.com')
+        ->call('updateProfileInformation');
+
+    $john->refresh();
+
+    expect($john->username)->toEqual('john');
 });
 
 test('email verification status is unchanged when email address is unchanged', function (): void {
@@ -38,6 +83,7 @@ test('email verification status is unchanged when email address is unchanged', f
 
     $response = Livewire::test(Profile::class)
         ->set('name', 'Test User')
+        ->set('username', 'JonSnow')
         ->set('email', $user->email)
         ->call('updateProfileInformation');
 

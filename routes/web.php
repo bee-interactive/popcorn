@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\User\UserController;
-use App\Livewire\List\ListIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Tmdb;
+use App\Livewire\Wishlist\ListIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('welcome'))->name('home');

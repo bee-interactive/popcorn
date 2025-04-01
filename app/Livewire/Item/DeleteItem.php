@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\List;
+namespace App\Livewire\Item;
 
 use Flux\Flux;
 use LivewireUI\Modal\ModalComponent;

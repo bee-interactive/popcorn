@@ -1,17 +1,28 @@
-<flux:modal name="create-wishlist" class="w-[85vw] md:w-lg">
-    <div class="space-y-6">
-        <div>
+<div>
+    <div>
+        <div class="p-4">
             <flux:heading size="lg">{{ __('Create a wishlist') }}</flux:heading>
             <flux:text class="mt-2">{{ __('Give your wishlist a name / topic') }}</flux:text>
         </div>
+    </div>
 
-        <flux:input wire:model="name" label="{{ __('Wishlist name') }}" placeholder="{{ __('Name / topic') }}" />
+    <div class="p-4">
+        <div class="space-y-6">
+            <div>
+                <flux:input wire:model="name" label="{{ __('Wishlist name') }}" placeholder="{{ __('Name / topic') }}" />
+            </div>
 
-        <flux:checkbox wire:model="is_favorite" label="{{ __('Add to favorites') }}" />
-
-        <div class="flex">
-            <flux:spacer />
-            <flux:button type="button" wire:click="save" variant="primary">Save</flux:button>
+            <div>
+                <flux:checkbox wire:model="is_favorite" label="{{ __('Add to favorites') }}" />
+            </div>
         </div>
     </div>
-</flux:modal>
+
+    <div class="p-4 rounded-b border-t flex-wrap bg-white flex items-center justify-between">
+        <flux:button variant="filled" wire:click.prevent="$dispatch('closeModal')">{{ __('Cancel') }}</flux:button>
+
+        <flux:button variant="primary" autofocus wire:click="save">
+            {{ __('Save') }}
+        </flux:button>
+    </div>
+</div>
