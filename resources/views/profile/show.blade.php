@@ -49,7 +49,7 @@
 
                 <div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-2 gap-y-6 lg:gap-y-4">
-                        @foreach($user->items as $item)
+                        @foreach($user->items->sortByDesc('created_at') as $item)
                             @if($item->poster_path)
                                 <img class="shadow-lg rounded w-full h-full" src="https://image.tmdb.org/t/p/w400{{ $item->poster_path }}" alt="">
                             @else
