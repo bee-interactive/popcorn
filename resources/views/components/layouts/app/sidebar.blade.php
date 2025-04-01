@@ -16,6 +16,10 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
 
+                <flux:navlist.group class="grid">
+                    <flux:navlist.item icon="film" :href="route('trending.index')" :current="request()->routeIs('trending.index')" wire:navigate>{{ __('Trending') }}</flux:navlist.item>
+                </flux:navlist.group>
+
                 <flux:navlist.group expandable heading="{{ __('My lists') }}" class="grid">
                     <div>
                         <livewire:wishlist.user-wishlists />

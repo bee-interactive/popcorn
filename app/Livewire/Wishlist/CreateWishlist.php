@@ -36,6 +36,6 @@ class CreateWishlist extends ModalComponent
             variant: 'success',
         );
 
-        Flux::modals()->close();
+        $this->closeModal();
     }
 }
