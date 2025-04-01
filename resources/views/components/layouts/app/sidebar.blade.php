@@ -11,16 +11,18 @@
                 <x-app-logo />
             </a>
 
-            <flux:navlist variant="outline" class="space-y-4">
+            <flux:navlist variant="outline" class="space-y-2">
                 <flux:navlist.group :heading="__('Your popcorn space')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
 
-                <flux:navlist.group class="grid">
-                    <flux:navlist.item icon="film" :href="route('trending.index')" :current="request()->routeIs('trending.index')" wire:navigate>{{ __('Trending') }}</flux:navlist.item>
-                </flux:navlist.group>
+                <flux:navlist.item icon="film" :href="route('trending.index')" :current="request()->routeIs('trending.index')" wire:navigate>{{ __('Trending') }}</flux:navlist.item>
 
-                <flux:navlist.group expandable heading="{{ __('My lists') }}" class="grid">
+                <div class="mt-2">
+                    <flux:navlist.item icon="heart" :href="route('viewed.index')" :current="request()->routeIs('viewed.index')" wire:navigate>{{ __('Viewed') }}</flux:navlist.item>
+                </div>
+
+                <flux:navlist.group expandable heading="{{ __('My lists') }}" class="grid mt-2">
                     <div>
                         <livewire:wishlist.user-wishlists />
                     </div>

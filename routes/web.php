@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\UserController;
+use App\Livewire\Item\ViewedItems;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -15,6 +16,8 @@ Route::middleware(['auth'])->group(function (): void {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 
     Route::get('trending', TrendingItems::class)->name('trending.index');
+
+    Route::get('viewed', ViewedItems::class)->name('viewed.index');
 
     Route::redirect('settings', 'settings/profile');
 
