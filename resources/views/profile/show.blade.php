@@ -1,4 +1,4 @@
-<x-layouts.public :title="$user->username . ' - Popcorn'">
+<x-layouts.public :title="$user->name . ' (@'. $user->username .') - Popcorn'">
     <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
         <x-app-logo />
     </a>
@@ -7,6 +7,11 @@
         <div class="grid auto-rows-min gap-4">
             <div class="text-center pb-4">
                 <flux:heading size="xl">{{ $user->name }}</flux:heading>
+
+                <div class="max-w-md mx-auto">
+                    <flux:text>&#64;{{ $user->username }}</flux:text>
+                    <flux:text class="mt-2">{{ $user->description }}</flux:text>
+                </div>
             </div>
 
             @if($user->items->isNotEmpty())

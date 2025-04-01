@@ -29,6 +29,12 @@
                 @endif
             </div>
 
+            <div>
+                <flux:textarea rows="auto" resize="none" wire:model="description" label="{{ __('Short bio') }}" />
+            </div>
+
+            <flux:checkbox wire:model.lazy="public_profile" label="{{ __('Activate public profile') }}" />
+
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
                     <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>

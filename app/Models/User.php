@@ -27,6 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'tmdb_token',
+        'description',
+        'public_profile',
     ];
 
     /**
@@ -75,6 +77,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'public_profile' => 'boolean',
         ];
     }
 }

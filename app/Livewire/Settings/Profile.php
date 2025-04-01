@@ -17,6 +17,10 @@ class Profile extends Component
 
     public string $email = '';
 
+    public ?string $description = '';
+
+    public bool $public_profile = false;
+
     /**
      * Mount the component.
      */
@@ -25,6 +29,8 @@ class Profile extends Component
         $this->name = Auth::user()->name;
         $this->username = Auth::user()->username;
         $this->email = Auth::user()->email;
+        $this->public_profile = Auth::user()->public_profile;
+        $this->description = Auth::user()->description;
     }
 
     /**
@@ -50,6 +56,10 @@ class Profile extends Component
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id),
             ],
+
+            'public_profile' => ['boolean'],
+
+            'description' => ['max:500'],
         ]);
 
         $user->fill($validated);
