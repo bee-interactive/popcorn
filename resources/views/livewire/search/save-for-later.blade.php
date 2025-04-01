@@ -1,7 +1,7 @@
 <div class="px-4 py-6">
     <div class="space-y-6">
         <div class="mb-4">
-            <flux:heading size="lg">{{ __('Save for later') }}</flux:heading>
+            <flux:heading size="lg">{{ __('Save :item for later', ['item' => ($this->result['title'] ?? $this->result['name'])]) }}</flux:heading>
         </div>
 
         <div>
@@ -13,7 +13,7 @@
         </div>
 
         <div>
-            <flux:textarea rows="auto" label="{{ __('Add a note to this entry') }}" resize="none" />
+            <flux:textarea wire:model="note" rows="auto" label="{{ __('Add a note to this entry') }}" resize="none" />
         </div>
 
         <div class="flex justify-between items-center">
