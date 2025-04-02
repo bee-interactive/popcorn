@@ -33,7 +33,16 @@
                 <flux:textarea rows="auto" resize="none" wire:model="description" label="{{ __('Short bio') }}" />
             </div>
 
-            <flux:checkbox wire:model.lazy="public_profile" label="{{ __('Activate public profile') }}" />
+            <div>
+                <flux:checkbox wire:model.lazy="public_profile" label="{{ __('Activate public profile') }}" />
+            </div>
+
+            <div>
+                <flux:select variant="listbox" wire:model="language" searchable label="Interface language" placeholder="Choose your language">
+                    <flux:select.option value="en">{{ __('English') }}</flux:select.option>
+                    <flux:select.option value="fr">{{ __('French') }}</flux:select.option>
+                </flux:select>
+            </div>
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">

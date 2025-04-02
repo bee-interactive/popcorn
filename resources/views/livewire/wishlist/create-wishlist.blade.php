@@ -1,7 +1,7 @@
 <div>
     <div>
         <div class="p-4">
-            <flux:heading size="lg">{{ __('Create a wishlist') }}</flux:heading>
+            <flux:heading size="lg">{{ __('Create a list') }}</flux:heading>
             <flux:text class="mt-2">{{ __('Give your wishlist a name / topic') }}</flux:text>
         </div>
     </div>

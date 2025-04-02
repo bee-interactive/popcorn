@@ -29,6 +29,7 @@ class User extends Authenticatable
         'tmdb_token',
         'description',
         'public_profile',
+        'language',
     ];
 
     /**

@@ -19,6 +19,8 @@ class Profile extends Component
 
     public ?string $description = '';
 
+    public ?string $language = '';
+
     public bool $public_profile = false;
 
     /**
@@ -31,6 +33,7 @@ class Profile extends Component
         $this->email = Auth::user()->email;
         $this->public_profile = Auth::user()->public_profile;
         $this->description = Auth::user()->description;
+        $this->language = Auth::user()->language;
     }
 
     /**
@@ -58,6 +61,8 @@ class Profile extends Component
             ],
 
             'public_profile' => ['boolean'],
+
+            'language' => ['in:fr,en'],
 
             'description' => ['max:500'],
         ]);
