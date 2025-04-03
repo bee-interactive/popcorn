@@ -22,6 +22,10 @@
                     <flux:navlist.item icon="heart" :href="route('viewed.index')" :current="request()->routeIs('viewed.index')" wire:navigate>{{ __('Viewed') }}</flux:navlist.item>
                 </div>
 
+                <div>
+                    <flux:navlist.item icon="users" :href="route('feed.index')" :current="request()->routeIs('feed.index')" wire:navigate>{{ __('Feed') }}</flux:navlist.item>
+                </div>
+
                 <flux:navlist.group expandable heading="{{ __('My lists') }}" class="grid mt-2">
                     <div>
                         <livewire:wishlist.user-wishlists />

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -80,5 +83,11 @@ class User extends Authenticatable
             'password' => 'hashed',
             'public_profile' => 'boolean',
         ];
+    }
+
+    #[Scope]
+    protected function public(Builder $query): void
+    {
+        $query->where('public_profile', true);
     }
 }

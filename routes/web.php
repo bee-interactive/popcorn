@@ -7,6 +7,7 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Tmdb;
 use App\Livewire\Trending\TrendingItems;
+use App\Livewire\Users\Feed;
 use App\Livewire\Wishlist\ListIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('trending', TrendingItems::class)->name('trending.index');
 
     Route::get('viewed', ViewedItems::class)->name('viewed.index');
+
+    Route::get('feed', Feed::class)->name('feed.index');
 
     Route::redirect('settings', 'settings/profile');
 

@@ -17,6 +17,12 @@ class SearchBar extends Component
     {
         $response = $connector->send(new SearchMultiRequest($this->query));
 
+        if ($response->failed()) {
+            $this->results = [];
+
+            return;
+        }
+
         $this->results = $response->json('results');
     }
 
