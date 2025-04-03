@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -52,24 +49,13 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
-    /**
-     * Get the user's initials
-     */
-    public function initials(): string
-    {
-        return Str::of($this->name)
-            ->explode(' ')
-            ->map(fn (string $name) => Str::of($name)->substr(0, 1))
-            ->implode('');
-    }
-
     public function profilePicture(int $size = 45): string
     {
         if ($this->getLastMedia('avatar') instanceof Media) {
             return '<img src="'.$this->getLastMedia('avatar')->getUrl().'" width="'.$size.'" height="'.$size.'" class="rounded-full border bg-[#f9f9f9] p-0.5 w-['.$size.'px] h-['.$size.'px]" alt="'.$this->name.'">';
         }
 
-        return '<span class="flex items-center relative w-['.$size.'px] h-['.$size.'px]"><span class="text-xs absolute inset-0 text-center flex items-center justify-center font-medium text-white">'.self::initials().'</span><img src="https://dummyimage.com/45x45/36c5d3/36c5d3" width="'.$size.'" height="'.$size.'" class="rounded-full border bg-[#f9f9f9] p-0.5 w-['.$size.'px] h-['.$size.'px]" alt="'.$this->name.'"></span>';
+        return '<span class="flex items-center relative w-['.$size.'px] h-['.$size.'px]"><span class="text-xs absolute inset-0 text-center flex items-center justify-center font-medium text-white">&nbsp;</span><img src="https://dummyimage.com/45x45/36c5d3/36c5d3" width="'.$size.'" height="'.$size.'" class="rounded-full border bg-[#f9f9f9] p-0.5 w-['.$size.'px] h-['.$size.'px]" alt="'.$this->name.'"></span>';
     }
 
     public function profilePictureUrl(): string

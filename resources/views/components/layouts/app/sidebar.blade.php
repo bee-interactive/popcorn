@@ -37,7 +37,7 @@
 
             <flux:spacer />
 
-            <flux:dropdown position="bottom" align="start">
+            <flux:dropdown position="bottom" class="hidden sm:block" align="start">
                 <flux:profile
                     :name="auth()->user()->name"
                     avatar="{{ auth()->user()->profilePictureUrl() }}"
@@ -98,7 +98,6 @@
 
             <flux:dropdown position="top" align="end">
                 <flux:profile
-                    :initials="auth()->user()->initials()"
                     icon-trailing="chevron-down"
                     avatar="{{ auth()->user()->profilePictureUrl() }}"
                 />
@@ -111,7 +110,7 @@
                                     <span
                                         class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
                                     >
-                                        {{ auth()->user()->initials() }}
+                                        <img src="{{ auth()->user()->profilePictureUrl() }}" alt="{{ auth()->user()->name }}">
                                     </span>
                                 </span>
 
