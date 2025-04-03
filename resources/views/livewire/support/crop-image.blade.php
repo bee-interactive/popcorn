@@ -2,7 +2,7 @@
     <div>
         <div class="p-4">
             <flux:heading size="lg">{{ __('Crop your picture') }}</flux:heading>
-            {{ __('Your image does not have the right ratio. To deal with this, you can crop your image to the correct size below') }}
+            {{ __('Your image does not have the right ratio. You can crop your image to the correct size below') }}
         </div>
     </div>
 
