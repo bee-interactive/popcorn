@@ -13,6 +13,13 @@ class SearchBar extends Component
 
     public string $query = '';
 
+    public string $layout = 'maximal';
+
+    public function mount(string $layout): void
+    {
+        $this->layout = $layout;
+    }
+
     public function updatedQuery(TmdbConnector $connector): void
     {
         $response = $connector->send(new SearchMultiRequest($this->query));

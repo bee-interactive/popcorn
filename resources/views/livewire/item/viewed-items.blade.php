@@ -1,6 +1,10 @@
 <div>
     <flux:heading size="xl" level="1">{{ __('Viewed items') }}</flux:heading>
 
+    <div class="mt-4">
+        <x-elements.minimized-search-bar />
+    </div>
+
     <div class="mt-12">
         @if(auth()->user()->items->where('watched', 1)->isNotEmpty())
             <flux:separator text="{{ __('Collection') }}" />

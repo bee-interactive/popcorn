@@ -7,29 +7,44 @@ use Livewire\Component;
 
 class Feed extends Component
 {
-    public $users;
+    public $dates;
 
     public function mount()
     {
-        $this->users = $this->getUsers();
+        $this->dates = $this->getDates();
     }
 
-    public function getUsers()
+    public function getDates()
     {
-        $this->users = User::with(['items' => function ($query) {
+        $this->dates = User::public()->with(['items' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }])
             ->whereHas('items')
             ->get()
-            ->map(function ($user) {
+            ->flatMap(function ($user) {
+                return $user->items->map(function ($item) use ($user) {
+                    return [
+                        'date' => $item->created_at->format('Y-m-d'),
+                        'user' => $user,
+                        'item' => $item->only(['id', 'name', 'backdrop_path', 'poster_path', 'created_at']),
+                    ];
+                });
+            })
+            ->groupBy('date')
+            ->map(function ($group) {
                 return [
-                    'user' => $user->only(['id', 'name', 'username']),
-                    'elements' => $user->items->groupBy(fn ($item) => $item->created_at->format('Y-m-d'))
-                        ->map(fn ($items) => $items->map(fn ($item) => $item->only(['id', 'name', 'backdrop_path', 'poster_path', 'created_at']))), // Convert to array
+                    'date' => $group->first()['date'],
+                    'users' => $group->groupBy('user.id')->map(function ($userItems) {
+                        return [
+                            'user' => $userItems->first()['user'],
+                            'items' => $userItems->pluck('item'),
+                        ];
+                    })->values(),
                 ];
             })
+            ->values()
             ->toArray();
 
-        return $this->users;
+        return $this->dates;
     }
 }

@@ -19,6 +19,7 @@
         "pinkary-project/type-guard": "^0.1.0",
         "saloonphp/laravel-plugin": "^3.5",
         "saloonphp/saloon": "^3.11",
+        "spatie/laravel-medialibrary": "^11.12",
         "spatie/laravel-permission": "^6.15",
         "staudenmeir/eloquent-has-many-deep": "^1.21",
         "wire-elements/modal": "^2.0"

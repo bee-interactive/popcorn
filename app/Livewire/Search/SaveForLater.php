@@ -28,7 +28,7 @@ class SaveForLater extends ModalComponent
             'synopsis' => ($this->result['overview'] ?? null),
             'backdrop_path' => ($this->result['backdrop_path'] ?? null),
             'poster_path' => ($this->result['poster_path'] ?? $this->result['profile_path'] ?? null),
-            'release_date' => ($this->result['release_date'] ?? null),
+            'release_date' => (! empty($this->result['release_date']) ? $this->result['release_date'] : null),
             'media_type' => $this->result['media_type'],
             'note' => $this->note,
         ]);

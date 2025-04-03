@@ -11,13 +11,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, HasRelationships, Notifiable;
+    use HasFactory;
+
+    use HasRelationships;
+    use InteractsWithMedia;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -54,6 +61,27 @@ class User extends Authenticatable
             ->explode(' ')
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
+    }
+
+    public function profilePicture(int $size = 45): string
+    {
+        if ($this->getLastMedia('avatar') instanceof Media) {
+            return '<img src="'.$this->getLastMedia('avatar')->getUrl().'" width="'.$size.'" height="'.$size.'" class="rounded-full border bg-[#f9f9f9] p-0.5 w-['.$size.'px] h-['.$size.'px]" alt="'.$this->name.'">';
+        }
+
+        return '<span class="flex items-center relative w-['.$size.'px] h-['.$size.'px]"><span class="text-xs absolute inset-0 text-center flex items-center justify-center font-medium text-white">'.self::initials().'</span><img src="https://dummyimage.com/45x45/36c5d3/36c5d3" width="'.$size.'" height="'.$size.'" class="rounded-full border bg-[#f9f9f9] p-0.5 w-['.$size.'px] h-['.$size.'px]" alt="'.$this->name.'"></span>';
+    }
+
+    public function profilePictureUrl(): string
+    {
+        return $this->getLastMedia('avatar') instanceof Media ? $this->getLastMedia('avatar')->getUrl() : 'https://dummyimage.com/45x45/36c5d3/36c5d3';
+    }
+
+    public function getLastMedia(string $collectionName = 'default', array $filters = []): ?Media
+    {
+        $media = cache()->rememberForever('medias_'.$collectionName.$this->id.'_'.$this->getTable(), fn (): \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection => $this->getMedia($collectionName, $filters));
+
+        return $media->last();
     }
 
     public function wishlists(): HasMany

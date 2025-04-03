@@ -74,7 +74,7 @@
         @endif
     </flux:command>
 
-    @if(auth()->user()->items->isNotEmpty())
+    @if(auth()->user()->items->isNotEmpty() && $layout !== 'minimal')
         <div class="mt-12">
             <flux:separator text="{{ __('Recents additions') }}" />
 

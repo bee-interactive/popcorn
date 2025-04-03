@@ -1,6 +1,10 @@
 <div>
     <flux:heading size="xl" level="1">{{ $wishlist->name }}</flux:heading>
 
+    <div class="mt-4">
+        <x-elements.search-bar />
+    </div>
+
     <div class="mt-12">
         @if($wishlist->items->where('watched', 0)->isNotEmpty())
             <flux:separator text="{{ __('Elements') }}" />

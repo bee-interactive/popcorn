@@ -35,7 +35,10 @@
 
     <div class="flex max-w-5xl mx-auto mt-12 h-full w-full flex-1 flex-col gap-4">
         <div class="grid auto-rows-min gap-4">
-            <div class="text-center pb-4">
+            <div class="text-center flex flex-col justify-center pb-4">
+                <div class="mx-auto mb-2">
+                    <img src="{{ $user->profilePictureUrl() }}" alt="{{ $user->name }}" class="rounded-full">
+                </div>
                 <flux:heading size="xl">{{ $user->name }}</flux:heading>
 
                 <div class="max-w-md mx-auto">

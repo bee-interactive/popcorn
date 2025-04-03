@@ -2,6 +2,10 @@
     <flux:heading size="xl" level="1">{{ __('Trending') }}</flux:heading>
     <flux:text class="mt-2">{{ __('Discover items that are currently trending') }}</flux:text>
 
+    <div class="mt-4">
+        <x-elements.minimized-search-bar />
+    </div>
+
     <div class="mt-12">
         <flux:separator text="{{ __('Elements') }}" />
 
