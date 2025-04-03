@@ -13,8 +13,8 @@
                     aspectRatio: {{ $minWidth }}/{{ $minHeight }},
                     autoCropArea: 1,
                     viewMode: 1,
-                    minCropBoxWidth: {{ $minWidth }},
-                    minCropBoxHeight: {{ $minHeight }},
+                    minCropBoxWidth: 100,
+                    minCropBoxHeight: 100,
                     crop(event) {
                         @this.set('x', event.detail.x)
                         @this.set('y', event.detail.y)
