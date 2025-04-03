@@ -2,6 +2,7 @@
 
 namespace App\Services\MediaLibrary;
 
+use Illuminate\Support\Facades\Hash;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 
@@ -36,6 +37,6 @@ class PopcornPathGenerator extends DefaultPathGenerator
      */
     protected function getBasePath(Media $media): string
     {
-        return md5($media->getKey().config('app.key'));
+        return Hash::make($media->getKey().config('app.key'));
     }
 }

@@ -23,6 +23,7 @@ arch('avoid inheritance')
         'App\Exceptions',
         'App\Http\Integrations',
         'App\Http\Requests',
+        'App\Services\MediaLibrary',
         'App\Jobs',
         'App\Livewire',
         'App\Mail',
