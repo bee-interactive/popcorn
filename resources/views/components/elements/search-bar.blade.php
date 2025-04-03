@@ -1,3 +1,7 @@
+@props([
+    'layout',
+])
+
 @if(auth()->user()->tmdb_token)
     @if(auth()->user()->wishlists->isEmpty())
         <flux:callout icon="exclamation-triangle">
@@ -9,7 +13,7 @@
             </x-slot>
         </flux:callout>
     @else
-        <livewire:search.search-bar layout="minimal" />
+        <livewire:search.search-bar layout="{{ $layout }}" />
     @endif
 @else
     <x-elements.configure-token />

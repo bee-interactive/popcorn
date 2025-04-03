@@ -2,7 +2,7 @@
     <flux:heading size="xl" level="1">{{ $wishlist->name }}</flux:heading>
 
     <div class="mt-4">
-        <x-elements.search-bar />
+        <x-elements.search-bar :layout="'minimal'" />
     </div>
 
     <div class="mt-12">
