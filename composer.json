@@ -13,6 +13,7 @@
         "bugsnag/bugsnag-laravel": "^2.29",
         "kirschbaum-development/eloquent-power-joins": "^4.2",
         "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.0",
         "livewire/flux-pro": "^2.1",
