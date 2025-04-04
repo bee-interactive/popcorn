@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import './cropperjs/cropperjs.css' layer(base);
 

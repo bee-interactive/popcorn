@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function (): void {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+Route::view('privacy-notice', 'pages.privacy-notice')->name('privacy.index');
+
 Route::prefix('/@{username}')->group(function () {
     Route::get('/', UserController::class)->name('profile.show');
 });
