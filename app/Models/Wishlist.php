@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Wishlist extends Model
 {
@@ -19,6 +20,19 @@ class Wishlist extends Model
         'order',
         'uuid',
     ];
+
+    protected $casts = [
+        'is_favorite' => 'boolean',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $wishlist): void {
+            $wishlist->uuid = Str::uuid()->toString();
+        });
+    }
 
     public function user(): BelongsTo
     {

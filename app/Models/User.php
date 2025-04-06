@@ -21,6 +21,7 @@ class User extends Authenticatable implements HasMedia
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasRelationships;
     use InteractsWithMedia;
     use Notifiable;

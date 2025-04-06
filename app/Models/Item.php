@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 use Override;
 
 class Item extends Model
@@ -32,6 +33,10 @@ class Item extends Model
     protected static function boot()
     {
         parent::boot();
+
+        static::creating(function (self $item): void {
+            $item->uuid = Str::uuid()->toString();
+        });
 
         static::deleting(function (self $item): void {
             $item->wishlist()->detach();
