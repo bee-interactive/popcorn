@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -52,6 +53,15 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $user): void {
+            $user->uuid = Str::uuid()->toString();
+        });
+    }
+
     public function profilePicture(int $size = 45): string
     {
         if ($this->getLastMedia('avatar') instanceof Media) {
@@ -63,7 +73,7 @@ class User extends Authenticatable implements HasMedia
 
     public function profilePictureUrl(): string
     {
-        return $this->getLastMedia('avatar') instanceof Media ? $this->getLastMedia('avatar')->getUrl() : 'https://dummyimage.com/45x45/36c5d3/36c5d3';
+        return $this->getLastMedia('avatar') instanceof Media ? $this->getLastMedia('avatar')->getFullUrl() : 'https://dummyimage.com/45x45/36c5d3/36c5d3';
     }
 
     public function getLastMedia(string $collectionName = 'default', array $filters = []): ?Media

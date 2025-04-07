@@ -19,6 +19,7 @@ final readonly class Username implements ValidationRule
         private ?User $user = null,
         private array $reserved = [
             'popcorn',
+            'me',
         ]
     ) {
         //
