@@ -85,7 +85,7 @@ class User extends Authenticatable implements HasMedia
 
     public function wishlists(): HasMany
     {
-        return $this->hasMany(Wishlist::class);
+        return $this->hasMany(Wishlist::class)->orderBy('is_favorite', 'desc')->orderBy('created_at', 'desc');
     }
 
     public function items(): HasManyDeep
@@ -95,7 +95,7 @@ class User extends Authenticatable implements HasMedia
             [Wishlist::class, 'item_wishlist'],
             ['user_id', 'wishlist_id', 'id'],
             ['id', 'id', 'item_id']
-        )->distinct();
+        )->distinct()->orderBy('created_at', 'desc');
     }
 
     /**

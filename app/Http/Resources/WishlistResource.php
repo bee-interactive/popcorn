@@ -18,6 +18,7 @@ class WishlistResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'is_favorite' => $this->is_favorite,
+            'items' => ItemResource::collection($this->items),
         ];
     }
 }

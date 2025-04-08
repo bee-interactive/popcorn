@@ -11,7 +11,13 @@ class ItemController
 {
     public function index()
     {
-        return ItemResource::collection(auth()->user()->items()->get());
+        $query = auth()->user()->items();
+
+        if (request()->has('watched')) {
+            $query->where('watched', filter_var(request()->get('watched'), FILTER_VALIDATE_BOOLEAN));
+        }
+
+        return ItemResource::collection($query->get());
     }
 
     public function show(string $uuid)
@@ -21,7 +27,9 @@ class ItemController
 
     public function store(StoreItemRequest $request)
     {
-        return new ItemResource($request->user()->items()->create([
+        $wishlist = $request->user()->wishlists()->where('uuid', $request->validated('data.wishlist_uuid'))->firstOrFail();
+
+        $item = $request->user()->items()->create([
             'media_type' => $request->validated('data.media_type'),
             'name' => $request->validated('data.name'),
             'synpsis' => $request->validated('data.synpsis'),
@@ -30,7 +38,11 @@ class ItemController
             'release_date' => $request->validated('data.release_date'),
             'note' => $request->validated('data.note'),
             'watched' => $request->validated('data.watched'),
-        ]));
+        ]);
+
+        $wishlist->items()->attach($item->id);
+
+        return new ItemResource($item);
     }
 
     public function update(UpdateItemRequest $request, string $uuid)

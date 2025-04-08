@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'language' => $this->language,
             'profile_picture' => $this->profilePictureUrl(),
+            'items' => ItemResource::collection($this->items),
         ];
     }
 }
