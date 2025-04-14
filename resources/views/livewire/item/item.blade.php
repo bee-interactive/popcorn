@@ -19,7 +19,7 @@
             <div>
                 <div class="flex justify-between">
                     <div class="flex justify-start">
-                        <flux:button tooltip="{{ __('See details') }}" size="sm" icon="eye"></flux:button>
+                        <flux:button type="link" href="{{ route('items.show', ['uuid' => $item->uuid]) }}" tooltip="{{ __('See details') }}" size="sm" icon="eye"></flux:button>
                     </div>
 
                     @if(!$item->watched)

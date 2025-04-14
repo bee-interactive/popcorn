@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Item\ItemController;
 use App\Http\Controllers\User\UserController;
 use App\Livewire\Item\ViewedItems;
 use App\Livewire\Settings\Appearance;
@@ -25,6 +26,8 @@ Route::middleware(['auth'])->group(function (): void {
     Route::redirect('settings', 'settings/profile');
 
     Route::get('lists/{uuid}', ListIndex::class)->name('wishlists.show');
+
+    Route::get('items/{uuid}', ItemController::class)->name('items.show');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
