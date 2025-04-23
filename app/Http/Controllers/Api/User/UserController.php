@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Http\Requests\Api\User\UpdateUserPasswordRequest;
-use App\Http\Requests\Api\User\UpdateUserRequest;
-use App\Http\Requests\Api\User\UpdateUserTmdbTokenRequest;
+use App\Models\User;
 use App\Http\Resources\MeResource;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Api\User\UpdateUserRequest;
+use App\Http\Requests\Api\User\UpdateUserAvatarRequest;
+use App\Http\Requests\Api\User\UpdateUserPasswordRequest;
+use App\Http\Requests\Api\User\UpdateUserTmdbTokenRequest;
 
 class UserController
 {
