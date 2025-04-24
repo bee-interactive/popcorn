@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Avatar\AvatarController;
+use App\Http\Controllers\Api\Feed\UserFeedController;
 use App\Http\Controllers\Api\Wishlist\WishlistController;
 
 Route::post('auth/login', [LoginController::class, 'login'])->name('api.login');
@@ -25,6 +26,8 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
     Route::resource('users', UserController::class)->except(['show']);
 
     Route::get('feed', FeedController::class)->name('api.feed.index');
+
+    Route::get('users-feed', UserFeedController::class)->name('api.user.feed.index');
 });
 
 Route::resource('users', UserController::class)->only(['show']);
