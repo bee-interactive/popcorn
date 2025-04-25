@@ -26,12 +26,21 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         $user = type($this->user())->as(User::class);
-
+info($this->all(), $user);
         return [
             'data.name' => ['required', 'string', 'max:255'],
 
             'data.username' => [
-                'required', 'string', 'min:4', 'max:50', Rule::unique(User::class, 'username')->ignore($user->id),
+                'required', 'string', 'min:4', 'max:50',
+                function ($attribute, $value, $fail) use ($user) {
+                    $exists = User::where('username', $value)
+                        ->where('id', '!=', $user->id)
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('The username is already taken by another user.');
+                    }
+                },
                 new Username($user),
             ],
 
@@ -41,7 +50,15 @@ class UpdateUserRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class, 'email')->ignore($user->id),
+                function ($attribute, $value, $fail) use ($user) {
+                    $exists = User::where('email', $value)
+                        ->where('id', '!=', $user->id)
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('The username is already taken by another user.');
+                    }
+                },
             ],
             'data.public_profile' => ['boolean'],
             'data.language' => ['in:fr,en'],
