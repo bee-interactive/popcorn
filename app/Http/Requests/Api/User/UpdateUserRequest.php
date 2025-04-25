@@ -31,7 +31,7 @@ class UpdateUserRequest extends FormRequest
             'data.name' => ['required', 'string', 'max:255'],
 
             'data.username' => [
-                'required', 'string', 'min:4', 'max:50', Rule::unique(User::class, 'username')->ignore($user->id),
+                'required', 'string', 'min:4', 'max:50', Rule::unique(User::class, 'username')->ignore($user->uuid, 'uuid'),
                 new Username($user),
             ],
 
@@ -41,7 +41,7 @@ class UpdateUserRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class, 'email')->ignore($user->id),
+                Rule::unique(User::class, 'email')->ignore($user->uuid, 'uuid'),
             ],
             'data.public_profile' => ['boolean'],
             'data.language' => ['in:fr,en'],
