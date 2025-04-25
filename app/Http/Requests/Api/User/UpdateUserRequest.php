@@ -25,13 +25,13 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $user = Auth::user();
+        $user = type($this->user())->as(User::class);
 
         return [
             'data.name' => ['required', 'string', 'max:255'],
 
             'data.username' => [
-                'required', 'string', 'min:4', 'max:50', Rule::unique(User::class, 'username')->ignore($user->uuid, 'uuid'),
+                'required', 'string', 'min:4', 'max:50', Rule::unique(User::class)->ignore($user->id),
                 new Username($user),
             ],
 
@@ -41,7 +41,7 @@ class UpdateUserRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class, 'email')->ignore($user->uuid, 'uuid'),
+                Rule::unique(User::class)->ignore($user->id),
             ],
             'data.public_profile' => ['boolean'],
             'data.language' => ['in:fr,en'],
