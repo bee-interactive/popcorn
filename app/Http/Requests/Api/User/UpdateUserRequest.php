@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         $user = type($this->user())->as(User::class);
-info($this->all(), $user);
+
         return [
             'data.name' => ['required', 'string', 'max:255'],
 
