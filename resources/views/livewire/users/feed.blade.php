@@ -4,44 +4,46 @@
 
     <div class="space-y-8 mt-12">
         @foreach($dates as $dateGroup)
-            <div class="space-y-8 max-w-lg">
+            <flux:card class="space-y-8 max-w-lg">
+                <div>
+                    <flux:heading size="lg">{{ \Carbon\Carbon::parse($dateGroup['date'])->isoFormat('LL') }}</flux:heading>
+                </div>
+
                 @foreach($dateGroup['users'] as $userGroup)
-                    <div>
-                        <flux:card class="p-4">
+                    <div class="rounded bg-gray-50 dark:bg-[#262626]/40 pb-2">
+                        <div class="p-4 pt-2">
                             <flux:heading size="sm">
-                                <div class="flex space-x-2 mb-4">
-                                    <div>
-                                        <flux:profile circle :chevron="false" avatar="{{ $userGroup['user']->profilePictureUrl() }}" />
+                                <div class="flex justify-between items-end mb-4">
+                                    <div class="flex space-x-2">
+                                        <div>
+                                            <flux:profile circle :chevron="false" avatar="{{ $userGroup['user']->profilePictureUrl() }}" />
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <span>{{ $userGroup['user']->name }}</span>
+                                            <span>&#64;{{ $userGroup['user']->username }}</span>
+                                        </div>
                                     </div>
 
-                                    <div class="flex flex-col">
-                                        <span>{{ $userGroup['user']['name'] }}</span>
-                                        <span>&#64;{{ $userGroup['user']['username'] }}</span>
-                                    </div>
+                                    <flux:link class="text-sm" variant="ghost" href="{{ route('profile.show', ['username' => $userGroup['user']->username]) }}">{{ __('View profile') }}</flux:link>
                                 </div>
                             </flux:heading>
 
                             <ul class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 @foreach($userGroup['items'] as $item)
                                     <li>
-                                        @if($item['poster_path'])
-                                            <img class="shadow-lg rounded w-full h-full" src="https://image.tmdb.org/t/p/w400{{ $item['poster_path'] }}" alt="">
+                                        @if($item->poster_path)
+                                            <img class="shadow-lg rounded w-full h-full" src="https://image.tmdb.org/t/p/w400{{ $item->poster_path }}" alt="">
                                         @else
                                             <img class="shadow-lg rounded w-full h-full" src="{{ asset('img/placeholder.jpg') }}" alt="">
                                         @endif
                                     </li>
                                 @endforeach
                             </ul>
-
-                            <div class="flex justify-between border-t mt-6 pt-4">
-                                <flux:link class="text-sm" variant="ghost" href="{{ route('profile.show', ['username' => $userGroup['user']['username']]) }}">{{ __('View profile') }}</flux:link>
-
-                                <span class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($dateGroup['date'])->diffForHumans() }}</span>
-                            </div>
-                        </flux:card>
+                        </div>
                     </div>
                 @endforeach
-            </div>
+            </flux:card>
         @endforeach
     </div>
 </div>

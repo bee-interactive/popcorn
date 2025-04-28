@@ -5,8 +5,6 @@ namespace App\Http\Requests\Api\User;
 use App\Models\User;
 use App\Rules\Username;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {

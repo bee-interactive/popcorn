@@ -2,49 +2,52 @@
 
 namespace App\Livewire\Users;
 
+use App\Http\Resources\ItemResource;
+use App\Http\Resources\UserResource;
+use App\Models\Item;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Feed extends Component
 {
-    public $dates;
-
-    public function mount()
+    public function render()
     {
-        $this->dates = $this->getDates();
+        return view('livewire.users.feed', [
+            'dates' => $this->getDates(),
+        ]);
     }
 
     public function getDates()
     {
-        $this->dates = User::public()->with(['items' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }])
-            ->whereHas('items')
+        return DB::table('item_wishlist')
+            ->join('wishlists', 'item_wishlist.wishlist_id', '=', 'wishlists.id')
+            ->join('users', 'wishlists.user_id', '=', 'users.id')
+            ->where('users.public_profile', 1)
+            ->select(
+                DB::raw('DATE(item_wishlist.created_at) as date'),
+                'wishlists.user_id',
+                'item_wishlist.item_id'
+            )
             ->get()
-            ->flatMap(function ($user) {
-                return $user->items->map(function ($item) use ($user) {
+            ->groupBy('date')
+            ->map(function ($entriesByDate, $date) {
+                $usersGrouped = collect($entriesByDate)->groupBy('user_id')->map(function ($entriesByUser, $userId) {
+                    $itemIds = $entriesByUser->pluck('item_id')->unique();
+
+                    $user = User::find($userId);
+                    $items = Item::whereIn('id', $itemIds)->get();
+
                     return [
-                        'date' => $item->created_at->format('Y-m-d'),
-                        'user' => $user,
-                        'item' => $item->only(['id', 'name', 'backdrop_path', 'poster_path', 'created_at']),
+                        'user' => UserResource::make($user),
+                        'items' => ItemResource::collection($items),
                     ];
                 });
-            })
-            ->groupBy('date')
-            ->map(function ($group) {
-                return [
-                    'date' => $group->first()['date'],
-                    'users' => $group->groupBy('user.id')->map(function ($userItems) {
-                        return [
-                            'user' => $userItems->first()['user'],
-                            'items' => $userItems->pluck('item'),
-                        ];
-                    })->values(),
-                ];
-            })
-            ->values()
-            ->toArray();
 
-        return $this->dates;
+                return [
+                    'date' => $date,
+                    'users' => $usersGrouped->values(),
+                ];
+            })->sortKeysDesc()->values();
     }
 }

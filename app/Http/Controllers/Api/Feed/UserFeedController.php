@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Feed;
 
+use App\Http\Resources\ItemResource;
+use App\Http\Resources\UserResource;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use App\Http\Resources\ItemResource;
-use App\Http\Resources\UserResource;
 
 class UserFeedController
 {
@@ -24,7 +24,7 @@ class UserFeedController
             ->get()
             ->groupBy('date')
             ->map(function ($entriesByDate, $date) {
-                $usersGrouped = collect($entriesByDate)->groupBy('user_id')->map(function ($entriesByUser, $userId) use ($date) {
+                $usersGrouped = collect($entriesByDate)->groupBy('user_id')->map(function ($entriesByUser, $userId) {
                     $itemIds = $entriesByUser->pluck('item_id')->unique();
 
                     $user = User::find($userId);
