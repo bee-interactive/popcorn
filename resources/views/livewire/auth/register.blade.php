@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-6">
     <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
 
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    <x-auth-session-status class="text-center" :error="session('error')" :status="session('status')" />
 
     <form wire:submit="register" class="flex flex-col gap-6">
         <flux:input
