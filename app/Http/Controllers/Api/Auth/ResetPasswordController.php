@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Support\Facades\Password;
-use App\Http\Requests\Api\Auth\ResetPasswordRequest;
 
 class ResetPasswordController
 {
-    public function reset(ResetPasswordRequest $request)
+    public function reset()
     {
-        $validated = $request->validated();
+        Password::sendResetLink(['email' => request('email')]);
 
-        Password::sendResetLink(['email' => $validated['email']]);
+        return response()->json(['success' => 'Success'], 200);
     }
 }
