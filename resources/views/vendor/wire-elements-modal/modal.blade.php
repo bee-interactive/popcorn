@@ -40,7 +40,7 @@
                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-bind:class="modalWidth"
-                    class="inline-block w-full bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 sm:w-full"
+                    class="inline-block w-full bg-white dark:bg-zinc-900 rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 sm:w-full"
                     id="modal-container"
                     x-trap.noscroll.inert="show && showActiveComponent"
                     aria-modal="true"

@@ -1,7 +1,7 @@
 <div>
     <div>
         <div class="p-4">
-            <flux:heading size="lg">{{ __('Mark :item as viewed', ['item' => $item->name]) }}</flux:heading>
+            <flux:heading size="lg">{{ __('Mark :item as viewed', ['item' => $name]) }}</flux:heading>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="p-4 rounded-b border-t flex-wrap bg-white flex items-center justify-between">
+    <div class="p-4 rounded-b border-t bg-white dark:border-zinc-600 dark:bg-zinc-950 flex-wrap flex items-center justify-between">
         <flux:button variant="filled" wire:click.prevent="$dispatch('closeModal')">{{ __('Cancel') }}</flux:button>
 
         <flux:button variant="primary" autofocus wire:click="save">

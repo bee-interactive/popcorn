@@ -177,5 +177,11 @@
     "The image has been uploaded and saved": "L'image a été uploadée et enregistrée",
     "The image has been deleted": "L'image a été supprimée",
     "Crop your picture": "Recadrer votre image",
-    "Your image does not have the right ratio. You can crop your image to the correct size below": "Votre image n'a pas le bon ratio. Vous pouvez recadrer votre image ci-dessous"
+    "Your image does not have the right ratio. You can crop your image to the correct size below": "Votre image n'a pas le bon ratio. Vous pouvez recadrer votre image ci-dessous",
+    "Profile picture": "Image de profil",
+    "Crop your image below to a square format": "Recadrez votre image ci-dessous au format carré",
+    "Go Home": "Retour à l’accueil",
+    "Invalid credentials": "Identifiants invalides",
+    "Click to set profile picture, jpg, png and max 10MB": "Cliquer pour choisir une image de profil, jpg, png et max 10 Mo",
+    "Username must be at least 4 characters, may only contain letters, numbers, and underscores.": "L'identifiant doit comporter au moins 4 caractères, ne peut contenir que des lettres, des chiffres et des underscores."
 }
