@@ -1,7 +1,7 @@
 <div>
     <div>
         <div class="p-4">
-            <flux:heading size="lg">{{ __('Mark :item as viewed', ['item' => $name]) }}</flux:heading>
+            <flux:heading size="lg">{{ __('Mark :item as viewed', ['item' => $item->name]) }}</flux:heading>
         </div>
     </div>
 

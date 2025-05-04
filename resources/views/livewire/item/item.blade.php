@@ -11,7 +11,7 @@
 
                 @if($item->synopsis)
                     <div class="mt-4 border-t border-white/60 pt-4">
-                        <p class="text-accent-foreground text-sm">{!! str($item->synopsis)->limit(80) !!}</p>
+                        <flux:text>{!! str($item->synopsis)->limit(80) !!}</flux:text>
                     </div>
                 @endif
             </div>

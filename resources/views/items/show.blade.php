@@ -31,15 +31,17 @@
                 <div class="relative">
                     @if($item->synopsis)
                         <div class="prose">
-                            <strong>Synopsis: </strong>
-                            <div>{!! $item->synopsis !!}</div>
+                            <strong><flux:text>Synopsis:</flux:text> </strong>
+                            <div>
+                                <flux:text>{!! $item->synopsis !!}</flux:text>
+                            </div>
                         </div>
                     @endif
 
                     @if($item->note)
                         <div class="prose mt-12">
-                            <strong>Note: </strong>
-                            <div>{!! $item->note !!}</div>
+                            <strong><flux:text>Note:</flux:text> </strong>
+                            <div><flux:text>{!! $item->note !!}</flux:text></div>
                         </div>
                     @endif
                 </div>
