@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use App\Http\Requests\Api\User\UpdateUserPasswordRequest;
-use App\Http\Requests\Api\User\UpdateUserRequest;
-use App\Http\Requests\Api\User\UpdateUserTmdbTokenRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Resources\MeResource;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Api\User\UpdateUserRequest;
+use App\Http\Requests\Api\User\UpdateUserPasswordRequest;
+use App\Http\Requests\Api\User\UpdateUserTmdbTokenRequest;
 
 class UserController
 {
@@ -66,5 +67,32 @@ class UserController
     public function me(): MeResource
     {
         return new MeResource(auth()->user());
+    }
+
+    public function destroy(Request $request)
+    {
+        $validated = $request->validate([
+            'password' => ['required', 'string'],
+        ]);
+
+        $user = $request->user();
+
+        if (! Hash::check($validated['password'], $user->password)) {
+            return response()->json([
+                'message' => 'The provided password is incorrect.',
+                'errors' => [
+                    'password' => ['The provided password is incorrect.'],
+                ],
+            ], 422);
+        }
+
+        // Revoke all tokens for Sanctum
+        $user->tokens()->delete();
+
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Account deleted successfully.',
+        ]);
     }
 }
